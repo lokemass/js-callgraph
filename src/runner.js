@@ -179,7 +179,27 @@ define(function (require, exports) {
                 if (!filename.endsWith(".json")) {
                     filename += ".json";
                 }
-                fs.writeFile(filename, JSON.stringify(result, null, 2), function (err) {
+                console.log("result",typeof(result))
+                let out = "[" + result.map(el => JSON.stringify(el)).join(",") + "]";
+
+                //----------------------------------------------------
+            
+//                 var fileSystem = require( "fs" );
+//                 var JSONStream = require( "JSONStream" );
+// var transformStream = JSONStream.stringify();
+// var outputStream = fileSystem.createWriteStream( filename);
+// transformStream.pipe( outputStream );    
+// result.forEach( transformStream.write );
+// transformStream.end();
+
+// outputStream.on(
+//     "finish",
+//     function handleFinish() {
+//         console.log("Done");
+//     }
+// );
+//----------------------------------------------------------
+                fs.writeFile(filename, out, function (err) {
                     if (err) {
                         /*
                         When happened something wrong (usually out of memory when we want print
